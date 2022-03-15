@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
+>
+<!-- here you add stuff; you access it though "editor: namespaces" -->
+<engine:Label text="Some text for the button:"/>
+<engine:Button name="someButtonName" text="Click me!"/>
+<engine:VisualElement class="iconImg"/>
+
+    
+</engine:UXML>
