@@ -7,6 +7,7 @@ using UnityEditor.SceneManagement;
 public class SceneSwitch : EditorWindow
 {
     string text = "";
+    string text2 = "";
     public int index = 0;
     public string[] options = new string[] { "aaa" };
 
@@ -35,6 +36,20 @@ public class SceneSwitch : EditorWindow
             //Create a field that allows you to insert buttons with the names of the scenes + Delete buttons
 
             //SEARCH HOT TO CREATE/DELETE BUTTONS - The name of the button (or another field) will represent the name of the scene - then call the function above
+        }
+
+        if(GUILayout.Button("Button2"))
+        {
+            Debug.Log("button2");
+        }
+
+        text2 = EditorGUILayout.TextField("Name of the scene: ", text2);
+        if (GUILayout.Button("Create Button"))
+        {
+            if (GUILayout.Button(text2))
+            {
+                Debug.Log("button2");
+            }
         }
     }
 }
