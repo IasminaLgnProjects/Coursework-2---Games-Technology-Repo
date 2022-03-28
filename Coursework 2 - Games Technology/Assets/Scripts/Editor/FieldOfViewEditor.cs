@@ -1,26 +1,40 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(FieldOfView))]
+[CustomEditor(typeof(FieldOfViewOLD))]
 public class FieldOfViewEditor : Editor
 {
+    //FieldOfViewColors ColorScript;
+
+    /*
+    FieldOfViewColors ColorScript
+    {
+        get
+        {
+            return ColorScript; //you need this instead of the simple Path path; for the Reset function to work
+        }
+    }*/
+
     private void OnSceneGUI()
     {
-        FieldOfView fov = (FieldOfView)target;
-        Handles.color = Color.white;
-        Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.radius);
+        FieldOfViewOLD fovScript = (FieldOfViewOLD)target;
 
-        Vector3 viewAngle01 = DirectionFromAngle(fov.transform.eulerAngles.y, -fov.angle / 2);
-        Vector3 viewAngle02 = DirectionFromAngle(fov.transform.eulerAngles.y, fov.angle / 2);
+        //handles
+        Handles.color = fovScript.fovCircleColor;
+        Handles.DrawWireArc(fovScript.transform.position, Vector3.up, Vector3.forward, 360, fovScript.radius);
 
-        Handles.color = Color.yellow;
-        Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle01 * fov.radius);
-        Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngle02 * fov.radius);
+        //lines of the view angle 
+        Vector3 viewAngle01 = DirectionFromAngle(fovScript.transform.eulerAngles.y, -fovScript.angle / 2);
+        Vector3 viewAngle02 = DirectionFromAngle(fovScript.transform.eulerAngles.y, fovScript.angle / 2);
 
-        if (fov.canSeePlayer)
+        Handles.color = fovScript.fovAngleColor;
+        Handles.DrawLine(fovScript.transform.position, fovScript.transform.position + viewAngle01 * fovScript.radius);
+        Handles.DrawLine(fovScript.transform.position, fovScript.transform.position + viewAngle02 * fovScript.radius);
+
+        if (fovScript.canSeePlayer)
         {
-            Handles.color = Color.green;
-            Handles.DrawLine(fov.transform.position, fov.playerRef.transform.position);
+            Handles.color = fovScript.playerSeenColor;
+            Handles.DrawLine(fovScript.transform.position, fovScript.playerRef.transform.position);
         }
     }
 

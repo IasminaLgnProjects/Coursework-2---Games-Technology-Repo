@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldOfView : MonoBehaviour
+public class FieldOfViewOLD : MonoBehaviour
 {
     public float radius;
-    [Range(0, 360)]
+    [Range(0, 180)]
     public float angle;
 
     public GameObject playerRef;
@@ -16,11 +16,29 @@ public class FieldOfView : MonoBehaviour
 
     public bool canSeePlayer;
 
+    //[SerializeField] FieldOfViewColors ColorScript;
+    //[SerializeField] Colors ColorScript;
+    //[SerializeField] Colors ColorScript = new Colors();
+    
+    public Color fovCircleColor = Color.yellow;
+    public Color fovAngleColor = Color.red;
+    public Color playerSeenColor = Color.green; //maybe without it
+
     private void Start()
     {
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
+        //ColorScript = gameObject.GetComponent<FieldOfViewColors>();
     }
+
+    /*
+    public Color GetColor
+    {
+        get
+        {
+            return ColorScript.fovCircleColor;
+        }
+    }*/
 
     private IEnumerator FOVRoutine()
     {
@@ -58,3 +76,9 @@ public class FieldOfView : MonoBehaviour
             canSeePlayer = false;
     }
 }
+
+/*
+public class Colors : MonoBehaviour
+{
+    [SerializeField] public Color fovCircleColor = Color.red;
+}*/
