@@ -8,21 +8,21 @@ public class CameraSync : EditorWindow
 {
     [SerializeField] Camera targetCam;
     [SerializeField] CameraProperties ControlCameraProperties = new CameraProperties();
+    [SerializeField] float resetFieldOfView = 60f;
 
     [SerializeField] bool syncCam = false;
-    [SerializeField] bool showSceneCamData = true;
-
 
     bool resetFovOnce = false;
 
     //instead of making the GAMEVIEW variable public so that it can be accessed outside 
-    public static EditorWindow GetMainGameView() //the location of the currently active game view
-    {
-        System.Reflection.Assembly assembly = typeof(UnityEditor.EditorWindow).Assembly;
-        Type type = assembly.GetType("UnityEditor.GameView");
-        EditorWindow gameview = EditorWindow.GetWindow(type);
-        return gameview;
-    }
+    
+    //public static EditorWindow GetMainGameView() //the location of the currently active game view
+    //{
+    //    System.Reflection.Assembly assembly = typeof(UnityEditor.EditorWindow).Assembly;
+    //    Type type = assembly.GetType("UnityEditor.GameView");
+    //    EditorWindow gameview = EditorWindow.GetWindow(type);
+    //    return gameview;
+    //}
 
     public static Transform GetTargetParent() // You have to drag and drop the camera
     {
@@ -53,11 +53,9 @@ public class CameraSync : EditorWindow
         instance = this;
 
         SceneView.beforeSceneGui += OnPreSceneGUI; //you need this for the -> to work
-    }
 
-    private void OnDisable()
-    {
-
+        Debug.Log(Camera.main);
+        targetCam = Camera.main;
     }
 
     static void OnPreSceneGUI(SceneView sceneView)
@@ -69,15 +67,9 @@ public class CameraSync : EditorWindow
     {
         var sceneViewCam = SceneView.lastActiveSceneView.camera; //The SceneView that was most recently in focus.
 
-        if (resetFovOnce)
-        {
-            resetFovOnce = false;
-        }
-        else
-        {
-            //You need this or else Unity Editor will automatically reset it at 60 and won't let you modify it
+
             sceneViewCam.fieldOfView = ControlCameraProperties.fov; // Trick to control the scene cam fov. We need to override it every time or it will get reset by the Unity Editor
-        }
+
 
         // Update the position changes from scene view control
         
@@ -93,18 +85,9 @@ public class CameraSync : EditorWindow
     {
         if (SceneView.lastActiveSceneView == null) //ID
             return;
-        EditorGUILayout.BeginHorizontal();
-        {
-        GUI.Label(new Rect(10, 10, 100, 20), "Hello World!");
-        }
-        EditorGUILayout.EndHorizontal();
-
-        // Camera data transfer controls
 
         EditorGUILayout.BeginHorizontal(); //old - puts all 5 components on the same line
         {
-
-
             //This creates the field to assign the camera, the 200 is the width
             targetCam = (Camera)EditorGUILayout.ObjectField(targetCam, typeof(Camera), true, GUILayout.MaxWidth(200), GUILayout.MaxHeight(20));
 
@@ -122,7 +105,7 @@ public class CameraSync : EditorWindow
 
         EditorGUILayout.BeginHorizontal(); //put all 3 buttons in the same horizontal line
         {
-            if (GUILayout.Button("<-")) //make the Scene align with Game
+            if (GUILayout.Button("Align Scene View with Game View")) //make the Scene align with Game
             {
                 ControlCameraProperties.Copy(targetCam); //you need both of these
                 SetSceneCamTransformData();
@@ -136,7 +119,7 @@ public class CameraSync : EditorWindow
 
             //GUI.enabled = (targetCam != null) && !syncCam;
 
-            if (GUILayout.Button("->")) //make the Game align with Scene
+            if (GUILayout.Button("Align Game View with Scene view")) //make the Game align with Scene
             {
                 ControlCameraProperties.Paste(targetCam);
             }
@@ -145,8 +128,6 @@ public class CameraSync : EditorWindow
 
         }
         EditorGUILayout.EndHorizontal();
-
-        
 
         //Creates the Camera View label right before position
         EditorGUILayout.LabelField(EditorGUIUtility.ObjectContent(SceneView.lastActiveSceneView.camera, typeof(Camera)));
@@ -166,8 +147,8 @@ public class CameraSync : EditorWindow
 
             //Fov Reset 
             if (GUILayout.Button("Reset", GUILayout.MaxWidth(45f))) //50 is the width of the button
-            { 
-                resetFovOnce = true; 
+            {
+            ControlCameraProperties.fov = resetFieldOfView;
             }
 
             GUILayout.EndHorizontal();

@@ -25,17 +25,10 @@ public class SceneSwitch : EditorWindow
         {
             Debug.Log("clicked");
 
-            //This loads when inserting text 
             EditorSceneManager.OpenScene("Assets/Scenes/" + text + ".unity");
 
 
             //POP-UP
-            //index = EditorGUILayout.Popup(index, options);
-            //EditorGUILayout.Popup(0, options);
-
-            //Create a field that allows you to insert buttons with the names of the scenes + Delete buttons
-
-            //SEARCH HOT TO CREATE/DELETE BUTTONS - The name of the button (or another field) will represent the name of the scene - then call the function above
         }
 
         if(GUILayout.Button("Button2"))
@@ -46,6 +39,8 @@ public class SceneSwitch : EditorWindow
         text2 = EditorGUILayout.TextField("Name of the scene: ", text2);
         if (GUILayout.Button("Create Button"))
         {
+            GUILayout.Button("Create Button2");
+
             if (GUILayout.Button(text2))
             {
                 Debug.Log("button2");

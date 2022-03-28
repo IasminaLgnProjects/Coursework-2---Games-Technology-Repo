@@ -7,10 +7,10 @@ public class DropObjectsEditor : EditorWindow
     int savedLayer;
     bool AlignNormals;
     Vector3 UpVector = new Vector3(0, 90, 0);
-    [MenuItem("Window/Drop Object")]                                                // add menu item
+    [MenuItem("Window/Drop Object")]                                               
     static void Awake()
     {
-        EditorWindow.GetWindow<DropObjectsEditor>().Show();                         // Get existing open window or if none, make a new one
+        EditorWindow.GetWindow<DropObjectsEditor>().Show();                         
     }
 
     void OnGUI()
@@ -33,33 +33,29 @@ public class DropObjectsEditor : EditorWindow
             DropObjects("Center");
         }
         EditorGUILayout.EndHorizontal();
-        AlignNormals = EditorGUILayout.ToggleLeft("Align Normals", AlignNormals);  // toggle to align the object with the normal direction of the surface
+        AlignNormals = EditorGUILayout.ToggleLeft("Align Normals", AlignNormals);  
         if (AlignNormals)
         {
             EditorGUILayout.BeginHorizontal();
-            UpVector = EditorGUILayout.Vector3Field("Up Vector", UpVector);          // Vector3 helping to specify the Up vector of the object
-                                                                                     // default has 90° on the Y axis, this is because by default
-                                                                                     // the objects I import have a rotation.
-                                                                                     // If anyone has a better way to do this I'd be happy
-                                                                                     // to see a better solution!
+            UpVector = EditorGUILayout.Vector3Field("Up Vector", UpVector);          
             GUILayout.EndHorizontal();
         }
     }
 
     void DropObjects(string Method)
     {
-        for (int i = 0; i < Selection.transforms.Length; i++)                       // drop multi-selected objects using the selected method
+        for (int i = 0; i < Selection.transforms.Length; i++)                       
         {
-            GameObject go = Selection.transforms[i].gameObject;                     // get the gameobject
-            if (!go) { continue; }                                                  // if there's no gameobject, skip the step — probably unnecessary but hey…
+            GameObject go = Selection.transforms[i].gameObject;                     
+            if (!go) { continue; }                                                  
 
-            Bounds bounds = go.GetComponent<Renderer>().bounds;                     // get the renderer's bounds
-            savedLayer = go.layer;                                                  // save the gameobject's initial layer
-            go.layer = 2;                                                           // set the gameobject's layer to ignore raycast
+            Bounds bounds = go.GetComponent<Renderer>().bounds;                     
+            savedLayer = go.layer;                                                  
+            go.layer = 2;                                                           
 
-            if (Physics.Raycast(go.transform.position, -Vector3.up, out hit))       // check if raycast hits something
+            if (Physics.Raycast(go.transform.position, -Vector3.up, out hit))       
             {
-                switch (Method)                                                     // determine how the y position will need to be adjusted
+                switch (Method)                                                     
                 {
                     case "Bottom":
                         yOffset = go.transform.position.y - bounds.min.y;
@@ -71,14 +67,14 @@ public class DropObjectsEditor : EditorWindow
                         yOffset = bounds.center.y - go.transform.position.y;
                         break;
                 }
-                if (AlignNormals)                                                   // if "Align Normals" is checked, set the gameobject's rotation
-                                                                                    // to match the raycast's hit position's normal, and add the specified offset.
+                if (AlignNormals)                                                   
+                                                                                    
                 {
                     go.transform.up = hit.normal + UpVector;
                 }
                 go.transform.position = new Vector3(hit.point.x, hit.point.y + yOffset, hit.point.z);
             }
-            go.layer = savedLayer;                                                  // restore the gameobject's layer to it's initial layer
+            go.layer = savedLayer;                                                  
         }
     }
 }
