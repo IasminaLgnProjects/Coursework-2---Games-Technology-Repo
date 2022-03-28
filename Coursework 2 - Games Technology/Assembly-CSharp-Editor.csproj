@@ -53,24 +53,11 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Editor\OLD SCRIPTS\Move 1m.cs" />
-    <Compile Include="Assets\Scripts\Editor\EditorFieldOfViewPlayer.cs" />
     <Compile Include="Assets\Scripts\Editor\CameraSync.cs" />
     <Compile Include="Assets\Scripts\Editor\DropObjectEditor.cs" />
-    <Compile Include="Assets\Scripts\Editor\FieldOfViewEditor.cs" />
-    <Compile Include="Assets\Scripts\Editor\OLD SCRIPTS\ScaleSphere.cs" />
-    <Compile Include="Assets\Scripts\Editor\OLD SCRIPTS\Custom Window.cs" />
     <Compile Include="Assets\Scripts\Editor\EditorPath.cs" />
-    <Compile Include="Assets\Scripts\Editor\OLD SCRIPTS\MyComponentEditor.cs" />
-    <Compile Include="Assets\Scripts\Editor\EditorPlayerFOV.cs" />
-    <Compile Include="Assets\Scripts\Editor\OLD SCRIPTS\WindowForUXML.cs" />
     <Compile Include="Assets\Scripts\Editor\SceneSwitch.cs" />
-    <Compile Include="Assets\Scripts\Editor\OLD SCRIPTS\Fancy Window Vertical Sliders.cs" />
     <Compile Include="Assets\Scripts\Editor\EditorFieldOfViewEnemy.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\Scripts\Editor\OLD SCRIPTS\IasminaUSS.uss" />
-    <None Include="Assets\Scripts\Editor\OLD SCRIPTS\IasminaUXML.uxml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

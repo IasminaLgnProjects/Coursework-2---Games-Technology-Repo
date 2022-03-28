@@ -15,7 +15,7 @@ public class EditorFieldOfViewEnemy : Editor
 		GUI.color = Color.black; //number color
 
 		Handles.DrawWireDisc(fovScript.transform.position, Vector3.forward, fovScript.radius);
-
+		fovScript.radius = Handles.ScaleValueHandle(fovScript.radius, fovScript.transform.position + fovScript.transform.right * fovScript.radius, fovScript.transform.rotation, 4, Handles.ConeHandleCap, 1);
 		Handles.Label(fovScript.transform.position + (fovScript.radius + 0.5f) * Vector3.right, fovScript.radius.ToString("0.0"));
 
 		Vector3 viewAngle1 = fovScript.DirectionFromAngle(-fovScript.transform.eulerAngles.z, -fovScript.angle/2);
@@ -31,7 +31,7 @@ public class EditorFieldOfViewEnemy : Editor
 			Handles.DrawLine(fovScript.transform.position, fovScript.playerRef.transform.position);
 		}
 
-		fovScript.radius = Handles.ScaleValueHandle(fovScript.radius, fovScript.transform.position + fovScript.transform.right * fovScript.radius, fovScript.transform.rotation, 4, Handles.ConeHandleCap, 1);
+		
 	}
 
 }

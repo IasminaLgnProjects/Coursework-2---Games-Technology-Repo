@@ -53,20 +53,14 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Week4\BasicSphereGizmo.cs" />
     <Compile Include="Assets\Scripts\Path\CreatePath.cs" />
-    <Compile Include="Assets\Scripts\FOVPlayerNew\FieldOfViewPlayer.cs" />
-    <Compile Include="Assets\Scripts\PlayerFOV.cs" />
+    <Compile Include="Assets\Scripts\EnemyPatroll.cs" />
     <Compile Include="Assets\Scripts\Path\Path.cs" />
-    <Compile Include="Assets\Scripts\FOVPlayerNew\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Week3\MyComponent.cs" />
-    <Compile Include="Assets\Scripts\FieldOfView\FieldOfViewOLD.cs" />
+    <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\FOVEnemy\FieldOfViewEnemy.cs" />
-    <Compile Include="Assets\Scripts\ComponentSerializer.cs" />
-    <Compile Include="Assets\Scripts\Week4\MyComponentW4.cs" />
-    <Compile Include="Assets\Scripts\Path\BezierCurve.cs" />
-    <Compile Include="Assets\Scripts\FieldOfView\FieldOfViewColors.cs" />
     <Compile Include="Assets\Scripts\Path\FollowPath.cs" />
+    <Compile Include="Assets\Scripts\Path\BezierCurve.cs" />
+    <Compile Include="Assets\Scripts\EnemyAttack.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
