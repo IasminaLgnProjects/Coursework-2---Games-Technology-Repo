@@ -10,20 +10,28 @@ public class EditorFieldOfViewEnemy : Editor
 	{
 		FieldOfViewEnemy fovScript = (FieldOfViewEnemy)target;
 
-		Handles.color = Color.white;
+		Handles.color = fovScript.fovCircleColor;
+
+		GUI.color = Color.black; //number color
+
 		Handles.DrawWireDisc(fovScript.transform.position, Vector3.forward, fovScript.radius);
+
+		Handles.Label(fovScript.transform.position + (fovScript.radius + 0.5f) * Vector3.right, fovScript.radius.ToString("0.0"));
+
 		Vector3 viewAngle1 = fovScript.DirectionFromAngle(-fovScript.transform.eulerAngles.z, -fovScript.angle/2);
 		Vector3 viewAngle2 = fovScript.DirectionFromAngle(-fovScript.transform.eulerAngles.z, fovScript.angle/2);
 
-		Handles.color = Color.yellow;
+		Handles.color = fovScript.fovAngleColor;
 		Handles.DrawLine(fovScript.transform.position, fovScript.transform.position + viewAngle1 * fovScript.radius);
 		Handles.DrawLine(fovScript.transform.position, fovScript.transform.position + viewAngle2 * fovScript.radius);
 
 		if(fovScript.CanSeePlayer)
         {
-			Handles.color = Color.green;
+			Handles.color = fovScript.playerSeenColor;
 			Handles.DrawLine(fovScript.transform.position, fovScript.playerRef.transform.position);
 		}
+
+		fovScript.radius = Handles.ScaleValueHandle(fovScript.radius, fovScript.transform.position + fovScript.transform.right * fovScript.radius, fovScript.transform.rotation, 4, Handles.ConeHandleCap, 1);
 	}
 
 }

@@ -13,6 +13,10 @@ public class FieldOfViewEnemy : MonoBehaviour
 
     public bool CanSeePlayer { get; private set; }
 
+    public Color fovCircleColor = Color.yellow;
+    public Color fovAngleColor = Color.red;
+    public Color playerSeenColor = Color.green; 
+
     private void Start()
     {
         playerRef = GameObject.FindGameObjectWithTag("Player");

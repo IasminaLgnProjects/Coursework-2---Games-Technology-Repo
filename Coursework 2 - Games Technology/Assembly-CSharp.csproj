@@ -61,11 +61,12 @@
     <Compile Include="Assets\Scripts\FOVPlayerNew\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Week3\MyComponent.cs" />
     <Compile Include="Assets\Scripts\FieldOfView\FieldOfViewOLD.cs" />
+    <Compile Include="Assets\Scripts\FOVEnemy\FieldOfViewEnemy.cs" />
     <Compile Include="Assets\Scripts\ComponentSerializer.cs" />
     <Compile Include="Assets\Scripts\Week4\MyComponentW4.cs" />
     <Compile Include="Assets\Scripts\Path\BezierCurve.cs" />
     <Compile Include="Assets\Scripts\FieldOfView\FieldOfViewColors.cs" />
-    <Compile Include="Assets\Scripts\FOVEnemy\FieldOfViewEnemy.cs" />
+    <Compile Include="Assets\Scripts\Path\FollowPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
