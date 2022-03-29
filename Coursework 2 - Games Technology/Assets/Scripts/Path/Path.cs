@@ -21,7 +21,6 @@ public class Path
         };
     }
 
-    //Add point
     public void AddSegment(Vector2 anchorPos)
     {
         points.Add(points[points.Count - 1] * 2 - points[points.Count - 2]);

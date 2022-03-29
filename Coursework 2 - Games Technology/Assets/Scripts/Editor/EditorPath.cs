@@ -11,7 +11,7 @@ public class EditorPath : Editor
     {
         get
         {
-            return pathCreatorScript.path; //you need this instead of the simple Path path; for the Reset function to work
+            return pathCreatorScript.path; 
         }
     }
 
@@ -33,11 +33,7 @@ public class EditorPath : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        if (GUILayout.Button("Reset Path (2 points)"))
-        {
-            Undo.RecordObject(pathCreatorScript, "Path Reset");
-            pathCreatorScript.GeneratePath();
-        }
+
 
         bool isClosed = GUILayout.Toggle(Path.GetIsClosed, "Closed Path");
         if (isClosed != Path.GetIsClosed)
@@ -59,6 +55,22 @@ public class EditorPath : Editor
         GUILayout.FlexibleSpace();
         GUILayout.Label("Right Click on a point");
         GUILayout.EndHorizontal();
+
+        GUILayout.Space(20f);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("2D view mode is required!");
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        GUILayout.Space(20f);
+
+        if (GUILayout.Button("Reset Path (2 points)"))
+        {
+            Undo.RecordObject(pathCreatorScript, "Path Reset");
+            pathCreatorScript.GeneratePath();
+        }
 
     }
 

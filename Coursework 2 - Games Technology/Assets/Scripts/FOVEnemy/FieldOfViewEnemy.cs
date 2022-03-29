@@ -7,11 +7,15 @@ public class FieldOfViewEnemy : MonoBehaviour
     public float radius = 5f;
     [Range(1, 360)] public float angle = 45f;
     public LayerMask targetLayer;
-    public LayerMask obstructionLayer;
+    public LayerMask obstaclesLayer;
 
     public GameObject playerRef;
 
-    public bool CanSeePlayer;
+    public bool CanSeePlayer
+    { 
+     get; 
+     private set; 
+    }
 
     public Color fovCircleColor = Color.yellow;
     public Color fovAngleColor = Color.red;
@@ -20,10 +24,10 @@ public class FieldOfViewEnemy : MonoBehaviour
     private void Start()
     {
         playerRef = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(FOVCheck());
+        StartCoroutine(FielfOfViewCheck());
     }
 
-    private IEnumerator FOVCheck()
+    private IEnumerator FielfOfViewCheck()
     {
         WaitForSeconds wait = new WaitForSeconds(0.2f);
 
@@ -47,7 +51,7 @@ public class FieldOfViewEnemy : MonoBehaviour
             {
                 float distanceToTarget = Vector2.Distance(transform.position, target.position);
 
-                if(!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+                if(!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstaclesLayer))
                 {
                     CanSeePlayer = true;
                 }

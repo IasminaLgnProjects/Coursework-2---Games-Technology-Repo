@@ -7,11 +7,12 @@ public class CreatePath : MonoBehaviour
     [HideInInspector]
     public Path path;
 
-    public Color anchorPointColor = Color.red;
-    public Color controlPointColor = Color.cyan;
     public Color pathColor = Color.yellow;
 
+    public Color anchorPointColor = Color.red;
     public float anchorPointDiameter = 0.1f;
+
+    public Color controlPointColor = Color.cyan;
     public float controlPointDiameter = .070f;
 
     public bool displayControlPoints = true;
