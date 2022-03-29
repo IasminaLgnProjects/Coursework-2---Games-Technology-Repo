@@ -7,7 +7,7 @@ using UnityEditor;
 public class EditorPath : Editor
 {
     CreatePath pathCreatorScript;
-    Path Path
+    Path PathScript
     {
         get
         {
@@ -35,11 +35,11 @@ public class EditorPath : Editor
         base.OnInspectorGUI();
 
 
-        bool isClosed = GUILayout.Toggle(Path.GetIsClosed, "Closed Path");
-        if (isClosed != Path.GetIsClosed)
+        bool isClosed = GUILayout.Toggle(PathScript.GetIsClosed, "Closed Path");
+        if (isClosed != PathScript.GetIsClosed)
         {
             Undo.RecordObject(pathCreatorScript, "Toggle closed path");
-            Path.GetIsClosed = isClosed;
+            PathScript.GetIsClosed = isClosed;
         }
 
         GUILayout.Space(20f);
@@ -82,7 +82,7 @@ public class EditorPath : Editor
         if (guiEvent.type == EventType.MouseDown && guiEvent.button == 0 && guiEvent.shift) //if player presses Shift + click
         {
             Undo.RecordObject(pathCreatorScript, "Point added");
-            Path.AddSegment(mousePos);
+            PathScript.AddSegment(mousePos);
         }
 
 
@@ -91,9 +91,9 @@ public class EditorPath : Editor
             float minDistToAnchorPoint = pathCreatorScript.anchorPointDiameter; //minimum threshhold 
             int closestAnchorPointIndex = -1; //set it to an invalid index 
 
-            for (int i = 0; i < Path.NumberOfPoints; i += 3) //incrementing by 3 just to catch the anchor points.
+            for (int i = 0; i < PathScript.NumberOfPoints; i += 3) //incrementing by 3 just to catch the anchor points.
             {
-                float dist = Vector2.Distance(mousePos, Path[i]);
+                float dist = Vector2.Distance(mousePos, PathScript[i]);
                 if (dist < minDistToAnchorPoint)
                 {
                     minDistToAnchorPoint = dist;
@@ -104,14 +104,14 @@ public class EditorPath : Editor
             if (closestAnchorPointIndex != -1)
             {
                 Undo.RecordObject(pathCreatorScript, "Point deleted");
-                Path.DeleteSegment(closestAnchorPointIndex);
+                PathScript.DeleteSegment(closestAnchorPointIndex);
             }
         }
     }
 
     void Draw()
     {
-        for (int i = 0; i < Path.NumberOfPoints; i++) //creates the points 
+        for (int i = 0; i < PathScript.NumberOfPoints; i++) //creates the points 
         {
             if (i % 3 == 0 || pathCreatorScript.displayControlPoints) // % 3 moving an anchor point
             {
@@ -136,19 +136,19 @@ public class EditorPath : Editor
                     handleSize = pathCreatorScript.controlPointDiameter;
                 }
 
-                Vector2 newPos = Handles.FreeMoveHandle(Path[i], Quaternion.identity, handleSize, Vector2.zero, Handles.SphereHandleCap); //used to be Cylinders
-                if (Path[i] != newPos)
+                Vector2 newPos = Handles.FreeMoveHandle(PathScript[i], Quaternion.identity, handleSize, Vector2.zero, Handles.SphereHandleCap); //used to be Cylinders
+                if (PathScript[i] != newPos)
                 {
                     Undo.RecordObject(pathCreatorScript, "Point moved");
-                    Path.MovePoint(i, newPos);
+                    PathScript.MovePoint(i, newPos);
                 }
 
             }
         }
 
-        for (int i = 0; i < Path.NumberOfSegments; i++) //creates the curves
+        for (int i = 0; i < PathScript.NumberOfSegments; i++) //creates the curves
         {
-            Vector2[] points = Path.GetPointsInSegment(i);
+            Vector2[] points = PathScript.GetPointsInSegment(i);
             if (pathCreatorScript.displayControlPoints)
             {
                 Handles.color = Color.black;

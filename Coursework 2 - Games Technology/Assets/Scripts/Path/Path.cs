@@ -57,31 +57,29 @@ public class Path
         }
     }
 
-    //Delete
     public void DeleteSegment(int anchorPointIndex)
     {
-        if (NumberOfSegments > 2 || !isClosed && NumberOfSegments > 1)
+        if (NumberOfSegments > 2 || (!isClosed && NumberOfSegments > 1))
         {
-            if (anchorPointIndex == 0) //first point (i = 0) + closed path 
+            if (anchorPointIndex == 0) 
             {
-                if (isClosed)
+                if (isClosed) 
                 {
                     points[points.Count - 1] = points[2];
                 }
-                points.RemoveRange(0, 3);
+                points.RemoveRange(0, 3); 
             }
-            else if (anchorPointIndex == points.Count - 1 && !isClosed) //last point (i = -1) and open path
+            else if (anchorPointIndex == points.Count - 1 && !isClosed) 
             {
                 points.RemoveRange(anchorPointIndex - 2, 3);
             }
-            else //default case i-1, i, i+1 - achor point and 2 control points
+            else 
             {
                 points.RemoveRange(anchorPointIndex - 1, 3);
             }
         }
     }
 
-    //Move
     public void MovePoint(int i, Vector2 pointPosition)
     {
         Vector2 deltaMove = pointPosition - points[i];
@@ -165,7 +163,7 @@ public class Path
         }
     }
 
-    int LoopIndex(int i) //loop all instances of the anchorIndex, as well as the correspondingControlIndex
+    int LoopIndex(int i)
     {
         return (i + points.Count) % points.Count;
     }

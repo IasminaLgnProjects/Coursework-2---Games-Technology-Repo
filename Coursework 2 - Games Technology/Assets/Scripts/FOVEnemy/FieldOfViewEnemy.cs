@@ -9,6 +9,7 @@ public class FieldOfViewEnemy : MonoBehaviour
     public LayerMask targetLayer;
     public LayerMask obstaclesLayer;
 
+    [HideInInspector]
     public GameObject playerRef;
 
     public bool CanSeePlayer
