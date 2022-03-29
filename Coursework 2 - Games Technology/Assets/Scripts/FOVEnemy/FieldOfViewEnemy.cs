@@ -11,7 +11,7 @@ public class FieldOfViewEnemy : MonoBehaviour
 
     public GameObject playerRef;
 
-    public bool CanSeePlayer { get; private set; }
+    public bool CanSeePlayer;
 
     public Color fovCircleColor = Color.yellow;
     public Color fovAngleColor = Color.red;
@@ -41,13 +41,13 @@ public class FieldOfViewEnemy : MonoBehaviour
         if(rangeCheck.Length > 0)
         {
             Transform target = rangeCheck[0].transform;
-            Vector2 directionToTaregt = (target.position - transform.position).normalized;
+            Vector2 directionToTarget = (target.position - transform.position).normalized;
 
-            if(Vector2.Angle(transform.up, directionToTaregt) < angle / 2)
+            if(Vector2.Angle(transform.up, directionToTarget) < angle / 2)
             {
                 float distanceToTarget = Vector2.Distance(transform.position, target.position);
 
-                if(!Physics2D.Raycast(transform.position, directionToTaregt, distanceToTarget, obstructionLayer))
+                if(!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
                 {
                     CanSeePlayer = true;
                 }

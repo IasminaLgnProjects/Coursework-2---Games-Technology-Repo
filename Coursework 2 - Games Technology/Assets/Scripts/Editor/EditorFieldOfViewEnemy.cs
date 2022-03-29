@@ -11,13 +11,16 @@ public class EditorFieldOfViewEnemy : Editor
 		FieldOfViewEnemy fovScript = (FieldOfViewEnemy)target;
 
 		Handles.color = fovScript.fovCircleColor;
-
-		GUI.color = Color.black; //number color
+		GUI.color = Color.white; //number color
 
 		Handles.DrawWireDisc(fovScript.transform.position, Vector3.forward, fovScript.radius);
+		
+		//Number
+		Handles.Label(fovScript.transform.position + (fovScript.radius + 0.5f) * Vector3.right, fovScript.radius.ToString("0.0")); 
+		
+		//Handle
 		fovScript.radius = Handles.ScaleValueHandle(fovScript.radius, fovScript.transform.position + fovScript.transform.right * fovScript.radius, fovScript.transform.rotation, 4, Handles.ConeHandleCap, 1);
-		Handles.Label(fovScript.transform.position + (fovScript.radius + 0.5f) * Vector3.right, fovScript.radius.ToString("0.0"));
-
+		
 		Vector3 viewAngle1 = fovScript.DirectionFromAngle(-fovScript.transform.eulerAngles.z, -fovScript.angle/2);
 		Vector3 viewAngle2 = fovScript.DirectionFromAngle(-fovScript.transform.eulerAngles.z, fovScript.angle/2);
 
